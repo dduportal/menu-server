@@ -21,6 +21,7 @@ public class Dish {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Long id;
+
   private String name;
 
   @ManyToMany(mappedBy = "dishes")
