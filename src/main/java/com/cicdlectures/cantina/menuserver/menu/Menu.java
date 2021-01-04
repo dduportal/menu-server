@@ -37,7 +37,7 @@ public class Menu {
   @EqualsAndHashCode.Include
   private String name;
 
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.REFRESH)
   @Getter
   @Setter
   @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
