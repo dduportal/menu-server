@@ -1,6 +1,6 @@
 package com.cicdlectures.cantina.menuserver.menu;
 
-import org.springframework.data.repository.CrudRepository;
+import com.cicdlectures.cantina.menuserver.storage.RefreshRepository;
 
-public interface MenuRepository extends CrudRepository<Menu, Long> {
+public interface MenuRepository extends RefreshRepository<Menu, Long> {
 }

@@ -1,11 +1,5 @@
 package com.cicdlectures.cantina.menuserver.menu;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.cicdlectures.cantina.menuserver.dish.DishRepository;
-import com.cicdlectures.cantina.menuserver.dish.Dish;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +13,7 @@ public class MenuController {
   private MenuRepository menuRepository;
 
   @Autowired
-  private DishRepository dishRepository;
+  private MenuService menuService;
 
   @GetMapping(path = "/menus", produces = "application/json")
   public Iterable<Menu> getMenus() {
@@ -27,21 +21,7 @@ public class MenuController {
   }
 
   @PostMapping("/menus")
-  Menu newMenu(@RequestBody Menu menu) {
-    Set<Dish> dishes = new HashSet<Dish>();
-
-    for(Dish dish: menu.getDishes()) {
-      Dish got = dishRepository.findByName(dish.getName());
-
-      if (got == null) {
-        got = dishRepository.save(dish);
-      }
-
-      dishes.add(got);
-    }
-
-    menu.setDishes(dishes);
-
-    return menuRepository.save(menu);
+  public Menu newMenu(@RequestBody Menu menu) {
+    return menuService.createMenu(menu);
   }
 }
