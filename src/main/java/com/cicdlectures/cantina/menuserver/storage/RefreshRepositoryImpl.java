@@ -23,4 +23,3 @@ public class RefreshRepositoryImpl<T, ID extends Serializable> extends SimpleJpa
     return t;
   }
 }
-
