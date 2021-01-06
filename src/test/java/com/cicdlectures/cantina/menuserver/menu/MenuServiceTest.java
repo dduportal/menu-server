@@ -24,27 +24,27 @@ public class MenuServiceTest {
 	private DishRepository dishRepository;
 
 	@BeforeEach
-  public void init() {
+	public void init() {
 		menuRepository = mock(MenuRepository.class);
 		dishRepository = mock(DishRepository.class);
-    sut = new MenuService(menuRepository, dishRepository);
-  }
+		sut = new MenuService(menuRepository, dishRepository);
+	}
 
 	@Test
-  @DisplayName("An empty menu (with no dishes) can be created")
-  void createEmptyMenu() {
+	@DisplayName("An empty menu (with no dishes) can be created")
+	void createEmptyMenu() {
 		final Menu emptyMenu = new Menu("empty", new HashSet<Dish>());
 		final Menu expectedMenu = emptyMenu;
 
 		when(menuRepository.save(emptyMenu)).thenReturn(emptyMenu);
 		when(menuRepository.refresh(emptyMenu)).thenReturn(emptyMenu);
 
-    Menu resultMenu = sut.createMenu(emptyMenu);
+		Menu resultMenu = sut.createMenu(emptyMenu);
 
 		verify(this.menuRepository).save(emptyMenu);
 		verify(this.menuRepository).refresh(emptyMenu);
 
 		assertEquals(expectedMenu, resultMenu);
-  }
+	}
 
 }

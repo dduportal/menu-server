@@ -7,7 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 
-public class RefreshRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements RefreshRepository<T, ID> {
+public class RefreshRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>
+    implements RefreshRepository<T, ID> {
 
   private final EntityManager entityManager;
 

@@ -26,15 +26,15 @@ public class MenuService {
   public Menu createMenu(Menu menu) {
     Set<Dish> dishes = new HashSet<Dish>();
 
-      for(Dish dish: menu.getDishes()) {
-        Dish got = dishRepository.findByName(dish.getName());
+    for (Dish dish : menu.getDishes()) {
+      Dish got = dishRepository.findByName(dish.getName());
 
-        if (got == null) {
-          got = dishRepository.save(dish);
-        }
-
-        dishes.add(got);
+      if (got == null) {
+        got = dishRepository.save(dish);
       }
+
+      dishes.add(got);
+    }
 
     menu.setDishes(dishes);
 
