@@ -26,7 +26,6 @@ public class MenuService {
   public Menu createMenu(Menu menu) {
     Set<Dish> dishes = new HashSet<Dish>();
 
-    // if(menu.getDishes() != null) {
       for(Dish dish: menu.getDishes()) {
         Dish got = dishRepository.findByName(dish.getName());
 
@@ -36,7 +35,6 @@ public class MenuService {
 
         dishes.add(got);
       }
-    // }
 
     menu.setDishes(dishes);
 
