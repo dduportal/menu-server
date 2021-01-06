@@ -2,8 +2,6 @@ package com.cicdlectures.cantina.menuserver.menu;
 
 import com.cicdlectures.cantina.menuserver.dish.Dish;
 
-import org.hibernate.annotations.Cascade;
-
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,22 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.Setter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Menu {
 
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Getter
   @EqualsAndHashCode.Include
   private Long id;

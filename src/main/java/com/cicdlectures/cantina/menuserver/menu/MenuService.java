@@ -18,10 +18,15 @@ public class MenuService {
   @Autowired
   private DishRepository dishRepository;
 
+  public MenuService(MenuRepository menuRepository, DishRepository dishRepository) {
+    this.dishRepository = dishRepository;
+    this.menuRepository = menuRepository;
+  }
+
   public Menu createMenu(Menu menu) {
     Set<Dish> dishes = new HashSet<Dish>();
 
-    for(Dish dish: menu.getDishes()) {
+    for (Dish dish : menu.getDishes()) {
       Dish got = dishRepository.findByName(dish.getName());
 
       if (got == null) {
