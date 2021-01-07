@@ -13,6 +13,7 @@ import lombok.AccessLevel;
 import lombok.experimental.Accessors;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,7 @@ import com.cicdlectures.menuserver.dto.DishDto;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@ToString
 @Accessors(chain = true)
 public class Dish {
 
@@ -35,6 +37,12 @@ public class Dish {
   @ManyToMany(mappedBy = "dishes")
   @EqualsAndHashCode.Exclude
   private Set<Menu> menus;
+
+  public Dish(Long id, String name, Set<Menu> menus) {
+    this.id = id;
+    this.name = name;
+    this.menus = menus;
+  }
 
   public static Set<Dish> fromDtoSet(Set<DishDto> dtos) {
     Set dishes = new HashSet<>();

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
 import com.cicdlectures.menuserver.dto.MenuDto;
 import com.cicdlectures.menuserver.service.CreateMenuService;
@@ -30,7 +32,8 @@ public class MenuController {
     return listMenuService.listMenus();
   }
 
-  @PostMapping("/menus")
+  @PostMapping(path = "/menus", produces = "application/json", consumes = "application/json")
+  @ResponseStatus(HttpStatus.CREATED)
   public MenuDto createMenu(@RequestBody MenuDto menu) {
     return createMenuService.createMenu(menu);
   }

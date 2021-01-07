@@ -10,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 @Accessors(chain = true)
+@ToString
 public class MenuDto {
 
   private Long id;
@@ -25,6 +27,12 @@ public class MenuDto {
   private String name;
 
   private Set<DishDto> dishes;
+
+  public MenuDto(Long id, String name, Set<DishDto> dishes) {
+    this.id = id;
+    this.name = name;
+    this.dishes = dishes;
+  }
 
   public static List<MenuDto> fromModelIterable(Iterable<Menu> models) {
     List<MenuDto> menus = new ArrayList<>();

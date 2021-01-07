@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.NoArgsConstructor;
 
@@ -17,11 +18,17 @@ import com.cicdlectures.menuserver.model.Dish;
 @Getter
 @Setter
 @Accessors(chain = true)
+@ToString
 public class DishDto {
 
   private Long id;
 
   private String name;
+
+  public DishDto(Long id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 
   public static Set<DishDto> fromModelSet(Set<Dish> models) {
     Set<DishDto> dishes = new HashSet<>();
