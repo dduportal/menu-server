@@ -47,6 +47,6 @@ jobs:
         with:
           name: app-jar
       - name: Building and Pushing Image
-        run: heroku container:push api
+        run: heroku container:push web
       - name: Release API
-        run: heroku container:release api
+        run: heroku container:release web
