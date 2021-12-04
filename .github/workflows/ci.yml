@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - 202*
+    tags:
+      - v*
+  pull_request:
+
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+          cache: 'maven'
+      - name: Run tests
+        run: mvn verify
+
+  release:
+    name: Release on Heroky
+    runs-on: ubuntu-20.04
+    needs: test
+    if: contains(github.ref, 'refs/tags/v')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name : TODO
+        run: ehco 'todo'
