@@ -38,6 +38,7 @@ jobs:
     if: contains(github.ref, 'refs/tags/v')
     env:
       HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      HEROKU_APP: menu-server-production
     steps:
       - name: Login to Heroku Container Registry
         run: heroku container:login
