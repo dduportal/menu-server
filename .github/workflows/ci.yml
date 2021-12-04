@@ -47,6 +47,6 @@ jobs:
         with:
           name: app-jar
       - name : Building Image
-        run: docker build -t registry.heroku.com/menu-server-production/webapp
+        run: docker build -t registry.heroku.com/menu-server-production/webapp .
       - name : Pushing Image
         run: docker push registry.heroku.com/menu-server-production/webapp
