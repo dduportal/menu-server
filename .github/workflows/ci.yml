@@ -31,7 +31,37 @@ jobs:
             Dockerfile
             target/*.jar
 
-  release:
+  github-release:
+    name: Release on Github
+    runs-on: ubuntu-20.04
+    needs: build
+    if: contains(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download jar app
+        uses: actions/download-artifact@v2
+        with:
+          name: app-jar
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./target/menuserver-1.0-SNAPSHOT.jar
+          asset_name: menu-server.jar
+          asset_content_type: application/jar-archive
+
+  heroku-release:
     name: Release on Heroku
     runs-on: ubuntu-20.04
     needs: build
