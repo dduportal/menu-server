@@ -6,5 +6,5 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
-    - run: ls -l # Liste les fichier du répertoire courant
+    - run: sudo apt-get update && sudo apt-get install -y cowsay
     - run: cat README.md | cowsay
