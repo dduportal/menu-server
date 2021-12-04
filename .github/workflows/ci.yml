@@ -36,18 +36,16 @@ jobs:
     runs-on: ubuntu-20.04
     needs: build
     if: contains(github.ref, 'refs/tags/v')
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
     steps:
       - name: Login to Heroku Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: registry.heroku.com
-          username: _
-          password: ${{ secrets.HEROKU_TOKEN }}
-      - name: Download a Single Artifact
+        run: heroku container:login
+      - name: Download jar app
         uses: actions/download-artifact@v2
         with:
           name: app-jar
-      - name : Building Image
-        run: docker build -t registry.heroku.com/menu-server-production/webapp .
-      - name : Pushing Image
-        run: docker push registry.heroku.com/menu-server-production/webapp
+      - name: Building and Pushing Image
+        run: heroku container:push api
+      - name: Release API
+        run: heroku container:release api
