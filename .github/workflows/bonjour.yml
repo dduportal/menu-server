@@ -7,8 +7,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2 # Récupère le contenu du dépôt correspondant au commit du workflow en cours
     - run: |
-      sudo apt-get update
-      sudo apt-get install -y cowsay maven
+        sudo apt-get update
+        sudo apt-get install -y cowsay maven
     - run: cat README.md | cowsay
     - run: mvn package
     - run: find ./target -type f
